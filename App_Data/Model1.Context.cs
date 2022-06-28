@@ -27,7 +27,7 @@ namespace BETEFSotware.App_Data
     
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Cart> Carts { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ShoppingCartData> ShoppingCartDatas { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
     }
 }

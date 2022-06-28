@@ -21,7 +21,6 @@ namespace BETEFSotware.App_Data
         public int UnitsInStock { get; set; }
         public string Category { get; set; }
         public string Description { get; set; }
-        public int SID { get; set; }
-        public int ROL { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

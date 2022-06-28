@@ -10,7 +10,7 @@
            
             @Html.ActionLink("Hello " + HttpContext.Current.Session["LoginName"], "Index")
         </li>
-        <li>@Html.ActionLink("Logout", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Logout", "Logout", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
       
     </ul>
     }

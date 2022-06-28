@@ -80,6 +80,13 @@ namespace BETWeb.Controllers
             
         }
 
-     
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Login", "Account");
+        }
+
+
+
     }
 }

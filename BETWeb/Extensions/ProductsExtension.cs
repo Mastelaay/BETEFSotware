@@ -23,8 +23,6 @@ namespace BETWeb.Extensions
                 Brand = entity.Brand,
                 Category = entity.Category,
                 Description = entity.Description,
-                SID = entity.SID,
-                ROL = entity.ROL,
                 ImageUrl = entity.ImageUrl
             };
         }

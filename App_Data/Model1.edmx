@@ -28,8 +28,7 @@
           <Property Name="UnitsInStock" Type="int" Nullable="false" />
           <Property Name="Category" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="SID" Type="int" Nullable="false" />
-          <Property Name="ROL" Type="int" Nullable="false" />
+          <Property Name="ImageUrl" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ShoppingCartData">
           <Key>
@@ -79,8 +78,8 @@
         <EntityContainer Name="BETDataEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="Carts" EntityType="BETDataModel.Cart" />
-          <EntitySet Name="Products" EntityType="BETDataModel.Product" />
           <EntitySet Name="ShoppingCartDatas" EntityType="BETDataModel.ShoppingCartData" />
+          <EntitySet Name="Products" EntityType="BETDataModel.Product" />
         </EntityContainer>
         <EntityType Name="Cart">
           <Key>
@@ -94,6 +93,17 @@
           <Property Name="DatePurchase" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="OrderNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="ShoppingCartData">
+          <Key>
+            <PropertyRef Name="TempOrderID" />
+          </Key>
+          <Property Name="TempOrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PID" Type="Int32" Nullable="false" />
+          <Property Name="PName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="PID" />
@@ -105,19 +115,7 @@
           <Property Name="UnitsInStock" Type="Int32" Nullable="false" />
           <Property Name="Category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SID" Type="Int32" Nullable="false" />
-          <Property Name="ROL" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ShoppingCartData">
-          <Key>
-            <PropertyRef Name="TempOrderID" />
-          </Key>
-          <Property Name="TempOrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PID" Type="Int32" Nullable="false" />
-          <Property Name="PName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ImageUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -151,21 +149,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="BETDataModel.Product">
-              <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="ROL" ColumnName="ROL" />
-                <ScalarProperty Name="SID" ColumnName="SID" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="UnitsInStock" ColumnName="UnitsInStock" />
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-                <ScalarProperty Name="Brand" ColumnName="Brand" />
-                <ScalarProperty Name="PName" ColumnName="PName" />
-                <ScalarProperty Name="PID" ColumnName="PID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ShoppingCartDatas">
             <EntityTypeMapping TypeName="BETDataModel.ShoppingCartData">
               <MappingFragment StoreEntitySet="ShoppingCartData">
@@ -175,6 +158,20 @@
                 <ScalarProperty Name="PName" ColumnName="PName" />
                 <ScalarProperty Name="PID" ColumnName="PID" />
                 <ScalarProperty Name="TempOrderID" ColumnName="TempOrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="BETDataModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="UnitsInStock" ColumnName="UnitsInStock" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="PName" ColumnName="PName" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
