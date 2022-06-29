@@ -55,10 +55,6 @@ C:\GITRepos\BETEFSotware\bin\BET.Domain.dll
 C:\GITRepos\BETEFSotware\bin\BouncyCastle.Crypto.dll
 C:\GITRepos\BETEFSotware\bin\EntityFramework.dll
 C:\GITRepos\BETEFSotware\bin\EntityFramework.SqlServer.dll
-C:\GITRepos\BETEFSotware\bin\Google.Protobuf.dll
-C:\GITRepos\BETEFSotware\bin\K4os.Compression.LZ4.dll
-C:\GITRepos\BETEFSotware\bin\K4os.Compression.LZ4.Streams.dll
-C:\GITRepos\BETEFSotware\bin\K4os.Hash.xxHash.dll
 C:\GITRepos\BETEFSotware\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\GITRepos\BETEFSotware\bin\Microsoft.Web.Infrastructure.dll
 C:\GITRepos\BETEFSotware\bin\MySql.Data.dll
@@ -92,11 +88,6 @@ C:\GITRepos\BETEFSotware\bin\BET.Domain.pdb
 C:\GITRepos\BETEFSotware\bin\BET.Domain.dll.config
 C:\GITRepos\BETEFSotware\bin\EntityFramework.xml
 C:\GITRepos\BETEFSotware\bin\EntityFramework.SqlServer.xml
-C:\GITRepos\BETEFSotware\bin\Google.Protobuf.pdb
-C:\GITRepos\BETEFSotware\bin\Google.Protobuf.xml
-C:\GITRepos\BETEFSotware\bin\K4os.Compression.LZ4.xml
-C:\GITRepos\BETEFSotware\bin\K4os.Compression.LZ4.Streams.xml
-C:\GITRepos\BETEFSotware\bin\K4os.Hash.xxHash.xml
 C:\GITRepos\BETEFSotware\bin\MySql.Data.xml
 C:\GITRepos\BETEFSotware\bin\MySql.Data.EntityFramework.xml
 C:\GITRepos\BETEFSotware\bin\Ninject.xml
