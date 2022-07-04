@@ -3,6 +3,9 @@
     ViewBag.Title = "Home Page";
 }
 @Html.Hidden("AddCart", Url.Action("AddToCart", "Home"))
+@* A better way is to download the styles and put them into a bundle config file. *@
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
 <script>
     function AddCart(id) {
         var data = {
@@ -14,27 +17,33 @@
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
             success: function (msg) {
-                location.reload();
+                swal({
+                    title: 'Success',
+                    text: 'Product added to cart',
+                    type: "success",
+                    timer: 2000
+                }).then(function () {
+                    location.reload(true);
+                })
             }
         })
     }
+
 </script>
 <h2>Products</h2>
-
 <form action="/Home/Category" method="get" id="category" class="option">
     <span>Category</span>
 
-<select id="catName" class="form-control" name="catName" onchange="$('#category').submit()">
-    <option>-- Select Product to filter --</option>
-    <option value="">All</option>
-    <option value="Washing Machines">Washing Machines</option>
-    <option value="Kettles">Kettles</option>
-    <option value="Microwaves">Microwaves</option>
-    <option value="Ports">Ports</option>
-    <option value="Fridges">Fridges</option>
-</select>
+    <select id="catName" class="form-control" name="catName" onchange="$('#category').submit()">
+        <option>-- Select Product to filter --</option>
+        <option value="">All</option>
+        <option value="Washing Machines">Washing Machines</option>
+        <option value="Kettles">Kettles</option>
+        <option value="Microwaves">Microwaves</option>
+        <option value="Ports">Ports</option>
+        <option value="Fridges">Fridges</option>
+    </select>
 </form>
-
 
 @if (ViewBag.Products.Count == 0)
 {
@@ -73,16 +82,3 @@ else
         }
     </div>
 }
-
-
-
-@*<tr>
-        <td>@item.pname</td>
-        <td>@string.format("{0:c}", item.unitprice)</td>
-        <td>
-            <a class="quantity" onclick="change(this, 1, @item.pid)">+</a>
-            <span>@item.quantity</span>
-            <a class="quantity" onclick="change(this, 0, @item.pid)">-</a>
-            <a class="remove" onclick="change(this, -1, @item.pid)">remove</a>
-        </td>
-    </tr>*@

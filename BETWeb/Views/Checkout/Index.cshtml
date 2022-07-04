@@ -7,6 +7,9 @@
 @Html.Hidden("UpdateTotal", Url.Action("UpdateTotal", "Checkout"))
 @Html.Hidden("QuantityChange", Url.Action("ChangeQuantity", "Checkout"))
 
+@* A better way is to download the styles and put them into a bundle config file. *@
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
 @section scripts {
     <script>
         function UpdateTotalPrice() {
@@ -15,14 +18,27 @@
                 url: $("#UpdateTotal").val(),
                 contentType: "application/json; charset=utf-8",
                 success: function (msg) {
-                    debugger
                     if (msg.Total == "R0.00") {
-                        location.reload();
-                        return;
+                        swal({
+                            title: 'Success',
+                            text: 'Cart Updated',
+                            type: "success",
+                            timer: 2000
+                        }).then(function () {
+                            location.reload();
+                            return;
+                        })
                     }
-
-                    $('#totalPrice').text(msg.Total);
-                    location.reload();
+                    swal({
+                        title: 'Success',
+                        text: 'Cart Updated',
+                        type: "success",
+                        timer: 2000
+                    }).then(function () {
+                        $('#totalPrice').text(msg.Total);
+                        location.reload();
+                    })
+                    
                 }
             })
         }
@@ -38,12 +54,6 @@
                 data: JSON.stringify(data),
                 contentType: "application/json; charset=utf-8",
                 success: function (msg) {
-                    debugger
-                    //if (msg.ResourceId == 0) {
-                    //    el.parentNode.parentNode.remove();
-                    //} else {
-                    //    $(el).siblings('span')[0].innerHTML = msg.ResourceId
-                    //}
                     UpdateTotalPrice()
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {

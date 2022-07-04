@@ -8,10 +8,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace BETWeb.Controllers
 {
-    public class AccountController : Controller
+    [AllowAnonymous]
+    public class AccountController : BaseController
     {
         private IBETUnitOfWork _uow { get; set; }
         private IUsers _accManager;
@@ -32,7 +34,6 @@ namespace BETWeb.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult Register(UsersModel model)
         {
@@ -40,7 +41,9 @@ namespace BETWeb.Controllers
             if (ModelState.IsValid)
             {
                 var request = _accManager.RegisterUser(model);
-              if(request.IsSuccess) return RedirectToAction("Account", "Login");
+                return request.IsSuccess
+                    ? RedirectToAction("Success", "Account")
+                    : RedirectToAction("Error", new { message = request.Message, type = "Registration" });
 
             }
             // If we got this far, something failed, redisplay form
@@ -52,7 +55,7 @@ namespace BETWeb.Controllers
         public ActionResult Login(string returnUrl)
         {
           
-            ViewBag.ReturnUrl = returnUrl;
+           ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
@@ -73,19 +76,39 @@ namespace BETWeb.Controllers
                 Session["LoginID"] = result.Item.UserId;
                 Session["LoginEmail"] = result.Item.Email;
                 Session["LoginName"] = result.Item.Name;
-                return   RedirectToAction("Index" , "Home");
+                FormsAuthentication.SetAuthCookie(result.Item.Name, false);
+                return returnUrl == null ? RedirectToAction("Index", "Home") : (ActionResult)Redirect(returnUrl);
             }
-           
-            return View(model);
-            
+            else
+            {
+              return RedirectToAction("Error", new { message = result.Message , type ="Login" });
+
+            }
+                        
+        }
+
+        public ActionResult Success()
+        {
+            return View();
+        }
+         
+        public ActionResult Error(string message , string type)
+        {
+            ViewBag.ErrorMessage = message;
+            ViewBag.ErrorType = type;
+            return View();
         }
 
         public ActionResult Logout()
         {
             Session.Clear();
+            FormsAuthentication.SignOut();
             return RedirectToAction("Login", "Account");
         }
-
+        public ActionResult UnAuthorized()
+        {
+            return View();
+        }
 
 
     }

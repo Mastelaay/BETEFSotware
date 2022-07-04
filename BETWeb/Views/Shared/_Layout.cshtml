@@ -16,8 +16,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("BETCart", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
+                @if (ViewBag.User != null)
+                {
+                    @Html.ActionLink("BETCart", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                </div>
             <div class="navbar-collapse collapse">
                 @if (ViewBag.User != null)
                 {

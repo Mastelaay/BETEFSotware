@@ -36,7 +36,8 @@ namespace BETEFSotware.Managers
             return new ApiItemResponseModel<UsersModel>
             {
                 IsSuccess = false,
-                Message = "username and password does not match! "
+                Message = "username and password does not match! ",
+                Item = null
             };
         }
 
@@ -60,7 +61,7 @@ namespace BETEFSotware.Managers
                 {
                     return new ApiResponseModel
                     {
-                        IsSuccess = true,
+                        IsSuccess = false,
                         Message = "User already exist"
                     };
                 }

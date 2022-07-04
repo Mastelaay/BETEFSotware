@@ -36,23 +36,27 @@ namespace BETWeb.Managers
                     {
                         var request = response.Content.ReadAsStringAsync().Result;
                         var responseObj = JObject.Parse(request);
-
-                        var model = new UsersModel
+                        var isSuccess = responseObj["IsSuccess"].Value<bool>();
+                        if (isSuccess)
                         {
-                            Name = responseObj["Item"]["Name"].ToString(),
-                            Email = responseObj["Item"]["Email"].ToString(),
-                            UserId = (int)responseObj["Item"]["UserId"],
-                        };
+                            var model = new UsersModel
+                            {
+                                Name = responseObj["Item"]["Name"].ToString(),
+                                Email = responseObj["Item"]["Email"].ToString(),
+                                UserId = (int)responseObj["Item"]["UserId"],
+                            };
+                            return new ApiItemResponseModel<UsersModel> { IsSuccess = responseObj["IsSuccess"].Value<bool>(), Item = model, Message = responseObj["Message"].ToString() };
+                        }
 
-                        return new ApiItemResponseModel<UsersModel> { IsSuccess = responseObj["IsSuccess"].Value<bool>(),Item = model, Message = responseObj["Message"].ToString() };
+                        return new ApiItemResponseModel<UsersModel> { IsSuccess = responseObj["IsSuccess"].Value<bool>(), Message = responseObj["Message"].ToString() };
                     }
                 }
-                return new ApiItemResponseModel<UsersModel> { IsSuccess = false, Message = "Error Saving cart" };
+                return new ApiItemResponseModel<UsersModel> { IsSuccess = false, Message = "Error Loggin in" };
             }
 
             catch (Exception e)
             {
-                return new ApiItemResponseModel<UsersModel> { IsSuccess = false, Message = "Exception Error Saving cart" + e };
+                return new ApiItemResponseModel<UsersModel> { IsSuccess = false, Message = "Exception Error Login" + e };
 
                 throw;
             }
@@ -76,12 +80,12 @@ namespace BETWeb.Managers
                         return new ApiResponseModel { IsSuccess = responseObj["IsSuccess"].Value<bool>(), Message = responseObj["Message"].ToString() };
                     }
                 }
-                return new ApiResponseModel { IsSuccess = false, Message = "Error Saving cart" };
+                return new ApiResponseModel { IsSuccess = false, Message = "Error RegisterUser" };
             }
 
             catch (Exception e)
             {
-                return new ApiResponseModel { IsSuccess = false, Message = "Exception Error Saving cart" + e };
+                return new ApiResponseModel { IsSuccess = false, Message = "Exception Error RegisterUser" + e };
 
                 throw;
             }

@@ -45,7 +45,6 @@ namespace BETWeb.Managers
 
         public ApiResponseModel QuatityChange(int type, int pId,int loggedInUser)
         {
-            
             var model = new CartActionsModel
             {
                 ProductId = pId,
@@ -91,7 +90,6 @@ namespace BETWeb.Managers
             }
             catch (Exception) { total = 0; }
             return new ApiResponseModel { Total = total.ToString("C", new CultureInfo("en-ZA")) };
-            //return Json(new { d = total.ToString("C", new CultureInfo("en-ZA")) }, JsonRequestBehavior.AllowGet);
         }
 
         public ApiResponseModel Clear(int loggedInUser)
@@ -154,7 +152,6 @@ namespace BETWeb.Managers
             {
               User = purchaseModel,
             };
-
 
             try
             {

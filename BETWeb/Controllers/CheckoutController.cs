@@ -12,16 +12,19 @@ using BET.Domain.Models;
 
 namespace BETWeb.Controllers
 {
+  
     public class CheckoutController : BaseController
     {
         private IBETUnitOfWork _uow { get; set; }
         private ICart _cartManager;
+  
         public CheckoutController(IBETUnitOfWork uow)
         {
             _uow = uow;
             _cartManager = new CartManager(_uow);
         }
 
+        [Authorize]
         public ActionResult Index()
         {
             var request = _cartManager.GetShoppingDataList(LoggedOnUser);
@@ -66,5 +69,6 @@ namespace BETWeb.Controllers
         {
             return View();
         }
+     
     }
 }

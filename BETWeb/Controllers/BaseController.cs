@@ -23,23 +23,27 @@ namespace BETWeb.Controllers
         {
            _uow = new BETUnitOfWork (new BETDataEntities());
             _cartManager = new CartManager(_uow);
-       
            
         }
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
-            if (LoggedOnUser == 0) RedirectToAction("Login", "Account");
-            _loggedOnUser = (int)System.Web.HttpContext.Current.Session["LoginID"];
-            _loggedOnUserName = System.Web.HttpContext.Current.Session["LoginName"].ToString();
-            _loggedOnUserEmail = System.Web.HttpContext.Current.Session["LoginEmail"].ToString();
+            var value = filterContext.HttpContext.Session["LoginID"];
+      
+            if (value != null)
+            {
+                _loggedOnUser = (int)System.Web.HttpContext.Current.Session["LoginID"];
+                _loggedOnUserName = System.Web.HttpContext.Current.Session["LoginName"].ToString();
+                _loggedOnUserEmail = System.Web.HttpContext.Current.Session["LoginEmail"].ToString();
 
-            ViewBag.User = _loggedOnUser > 0; ;
-            ViewBag.CartTotalPrice = CartTotalPrice.ToString("C", new CultureInfo("en-ZA"));
-            ViewBag.Cart = Cart;
-            ViewBag.CartUnits = Cart.Count;
-            ViewBag.CV = new CultureInfo("en-ZA");
+                ViewBag.User = _loggedOnUser > 0; 
+
+                ViewBag.CartTotalPrice = CartTotalPrice.ToString("C", new CultureInfo("en-ZA"));
+                ViewBag.Cart = Cart;
+                ViewBag.CartUnits = Cart.Count;
+                ViewBag.CV = new CultureInfo("en-ZA");
+            }
         }
 
 

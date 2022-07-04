@@ -90,7 +90,7 @@ namespace BETEFSotware.Managers
 
                     smtp.UseDefaultCredentials = true;
                     smtp.Credentials = networkCred;
-                   // smtp.Send(mailMessage);
+                   // smtp.Send(mailMessage); Google 
                 }
 
             }
